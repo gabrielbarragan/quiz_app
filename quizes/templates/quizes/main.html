@@ -5,5 +5,24 @@ Home
 {% endblock title %}
 
 {% block content %}
-Quiz List
+<div class="container">
+    <br class="row pt-4">
+        <h1>Quiz List</h1>
+        <hr>
+        {% for quiz in quizes %}
+          <ol>
+            <li><h4 class="">{{ quiz.name }}</h4>
+          <br>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Hacer quiz
+            </button>
+            {% include "quizes/modal.html" %}
+          </br>
+        {% endfor %}
+            </li>
+        </ol>
+</div>
+
+
 {% endblock content %}

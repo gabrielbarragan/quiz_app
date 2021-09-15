@@ -1,9 +1,26 @@
 {% extends "base.html" %}
 
 {% block title %}
-{{obj.name}}
+{{quiz.name}}
 {% endblock title %}
 
 {% block content %}
-{{obj.name}}
+<h2>{{quiz.name}}</h2>
+
+    {% for question in quiz.get_questions%}
+    <h6>{{question.text}}:</h6>
+    {% for answer in question.get_answer %}
+    <div class="form-check">
+      <input class="form-check-input" type="radio" value="{{answer.pk}}" name="{{question.pk}}" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault">
+      {{answer.text}}
+      </label>
+    </div>
+    {% endfor %}
+    <br>
+{% endfor %}
+   
+ 
+
+
 {% endblock content %}

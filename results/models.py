@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models.deletion import CASCADE
 from quizes.models import Quiz
 from django.contrib.auth.models import User
 

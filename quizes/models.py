@@ -4,9 +4,9 @@ from django.db import models
 # Create your models here.
 
 DIFF_CHOICES = (
-    ('lit', 'lit'),
-    ('med','med'),
-    ('high','high'),
+    ('fácil', 'fácil'),
+    ('medio','medio'),
+    ('alta','alta'),
 )
 
 class Quiz(models.Model):

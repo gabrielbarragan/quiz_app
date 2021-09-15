@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Quiz
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 # Create your views here.
 
@@ -10,6 +10,14 @@ class QuizListView (ListView):
     template_name = 'quizes/main.html'
     context_object_name= 'quizes'
 
-def quiz_view(request, pk):
-    quiz= Quiz.objects.get(pk=pk)
-    return render(request, 'quizes/quiz.html', {'obj':quiz})
+class QuizDetailView(DetailView):
+    """User detail view."""
+	
+    template_name='quizes/quiz.html'
+    slug_field= 'pk'
+    slug_url_kwarg='quiz_id'
+    queryset = Quiz.objects.all()
+
+    context_object_name = 'quiz'
+
+#sin usar por ahora

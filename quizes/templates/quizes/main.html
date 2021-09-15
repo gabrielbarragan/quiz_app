@@ -1,4 +1,12 @@
 {% extends "base.html" %}
+{% load static %}
+
+
+{% block scripts %}
+  <script src="{% static 'quizes/main.js' %}" defer>
+
+  </script>
+{% endblock scripts %}
 
 {% block title %}
 Home
@@ -9,18 +17,30 @@ Home
     <br class="row pt-4">
         <h1>Quiz List</h1>
         <hr>
-        {% for quiz in quizes %}
-          <ol>
+        <ol>
+          {% for quiz in quizes %}
             <li><h4 class="">{{ quiz.name }}</h4>
-          <br>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <span>
+            <!-- Button trigger modal -->  
+            <button 
+              type="button" 
+              class="btn btn-primary modal-button"
+              data-bs-toggle="modal" 
+              data-bs-target="#quizStartModal" 
+              data-pk="{{quiz.pk}}"
+              data-quiz="{{quiz.name}}"
+              data-questions="{{quiz.number_of_questions}}"
+              data-difficulty="{{quiz.difficulty}}"
+              data-time="{{quiz.time}}"
+              data-pass="{{quiz.required_score_to_pass}}">
                 Hacer quiz
             </button>
+          </span>
+
             {% include "quizes/modal.html" %}
-          </br>
-        {% endfor %}
-            </li>
+          </li>
+          <br>
+          {% endfor %}
         </ol>
 </div>
 

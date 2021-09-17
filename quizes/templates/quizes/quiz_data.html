@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block scripts %}
+  <script src="{% static 'quizes/quiz_data.js' %}" defer>
+
+  </script>
+{% endblock scripts %}
+
+{% block title %}
+
+{% endblock title %}
+
+{% block content %}
+TEST {{quiz_data.name}}
+{% endblock content %}

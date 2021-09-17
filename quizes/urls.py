@@ -1,7 +1,8 @@
 from django.urls import path
 from .views import (
     QuizListView,
-    QuizDetailView
+    QuizDetailView,
+    QuizDataView,
 )
 
 app_name='quizes'
@@ -13,8 +14,13 @@ urlpatterns = [
         name='main-view'
         ),
     path(
-        route='<str:quiz_id>/',
+        route='<int:quiz_id>/',
         view=QuizDetailView.as_view(), 
         name='quiz-view'
+        ),
+    path(
+        route='<int:quiz_id>/data/',
+        view=QuizDataView.as_view(), 
+        name='quiz-data-view'
         ),
 ]

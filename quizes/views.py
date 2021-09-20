@@ -1,8 +1,13 @@
+from django.http.response import HttpResponse
 from django.shortcuts import render
 
 from .models import Quiz
-from django.views.generic import ListView, DetailView
+from results.models import Result
+from questions.models import Question, Answer
+from django.views.generic import ListView, DetailView,CreateView
 from django.http import JsonResponse
+
+from results.forms import CreateResultForm
 
 # Create your views here.
 
@@ -44,7 +49,6 @@ class QuizDetailView(DetailView):
     queryset = Quiz.objects.all()
 
     context_object_name = 'quiz'
-
 class QuizDataView(JSONResponseMixin, DetailView):
     """Quiz data view."""
     template_name='quizes/quiz_data.html'
@@ -71,6 +75,51 @@ class QuizDataView(JSONResponseMixin, DetailView):
 
         return self.render_to_json_response(quiz_data)
 
+def save_quiz_view(request,quiz_id):
+    if request.is_ajax():
+        
+        answers=[]
+        data = request.POST
+        data_=dict(data)
+        
+        data_.pop('csrfmiddlewaretoken')
+        data_.pop('quiz_name')
+        data_.pop('n_question')
+
+        score=0
+        user= request.user
+        quiz = Quiz.objects.get(name=data['quiz_name'])
+        n_question= data['n_question']
+        multiplier= 100/int(n_question)
+
+        correct=''
+
+        for key,values in data_.items():
+            q=Question.objects.get(pk=key)
+
+            for ans in q.get_answer():
+                if ans.correct==True:
+                    correct=ans.text
+
+            if values[0] != '':
+                answer= Answer.objects.get(pk=values[0])
+                answered=answer.text
+
+                if answer.correct == True:
+                    score += 1 * multiplier 
+
+            elif values[0] =='':
+                answered='not answered'
+
+            answers.append({str(q):{'correct_answer': correct, 'answered':answered }})
+        Result.objects.create(quiz=quiz, user=user, score= score)
+
+        if score >= quiz.required_score_to_pass:
+            return JsonResponse({'passed': True, 'score':score, 'results': answers})
+        else:
+            return JsonResponse({'passed': False, 'score':score, 'results': answers})
+
+    return HttpResponse({'text':'works'})
 
 
     

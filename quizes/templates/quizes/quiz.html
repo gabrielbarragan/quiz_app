@@ -6,6 +6,7 @@
   <script src="{% static 'quizes/quiz_data.js' %}" defer>
 
   </script>
+
 {% endblock scripts %}
 
 {% block title %}
@@ -30,6 +31,11 @@
     <br>
   <hr>
 {% endfor %}
-<button type="submit" class="btn btn-primary mt-3">Guardar</button>
+<button type="submit" 
+class="btn btn-primary mt-3 modal-button"
+data-bs-toggle="modal" 
+data-bs-target="#quizStartModal">Guardar</button>
+{% include "quizes/modal.html" %}
 </form>
 {% endblock content %}
+

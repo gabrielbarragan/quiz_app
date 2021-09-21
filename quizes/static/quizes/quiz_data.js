@@ -7,6 +7,13 @@ const n_questions=  quizForm.getAttribute('data-n_of_questions')
 const csrf = document.getElementsByName('csrfmiddlewaretoken')
 const elements = [...document.getElementsByTagName('input')]
 
+// modal elements
+const modalBtns = [...document.getElementsByClassName('modal-button')]
+const modalTitle = document.getElementById('modaltitle')
+const modalText = document.getElementById('confirm-text')
+const modalList = document.getElementById('modal-list-confirm')
+const startBtn = document.getElementById('start-button')
+
 
 const sendData = () => {
     const data = {}
@@ -35,7 +42,15 @@ const sendData = () => {
         url: `${url}save/`,
         data: data,
         success: function(response){
-            console.log(response)
+            const results= response.results
+            const result_list=[]
+            const show_results = results.map((result)=>{
+                for (const [question, answer] of Object.entries(result)){
+                   result_list.push(`<li><b>Pregunta:</b> ${question} <b>Respuesta:</b> ${answer.answered} </li>`)
+                }
+                return console.log(result)
+            })
+            modalList.innerHTML=result_list
         },
         error: function(error){
             console.log(error)

@@ -1,9 +1,11 @@
 console.log('Hello World')
 
 const modalBtns = [...document.getElementsByClassName('modal-button')]
+const modalTitle = document.getElementById('modaltitle')
 const modalText = document.getElementById('confirm-text')
 const modalList = document.getElementById('modal-list-confirm')
 const startBtn = document.getElementById('start-button')
+
 
 modalBtns.forEach(modalBtn => modalBtn.addEventListener('click', () => {
     const pk = modalBtn.getAttribute('data-pk')
@@ -16,6 +18,7 @@ modalBtns.forEach(modalBtn => modalBtn.addEventListener('click', () => {
     modalText.innerHTML=`
         ¿Estás seguro que quieres realizar el quiz <b>${name}</b>?
     `
+    modalTitle.innerHTML=`${name}`
     modalList.innerHTML=`
         <li><b>Dificultad: </b> ${difficulty}</li>
         <li><b>Cantidad de preguntas: </b> ${questions}</li>

@@ -36,6 +36,8 @@ const sendData = () => {
     data['quiz_name'] = quiz_name
     data['n_question'] = n_questions
     console.log(data)
+    modalTitle.innerText= data['quiz_name']
+
 
     $.ajax({
         type:'POST',
@@ -43,14 +45,29 @@ const sendData = () => {
         data: data,
         success: function(response){
             const results= response.results
+            const score = response.score
             const result_list=[]
             const show_results = results.map((result)=>{
                 for (const [question, answer] of Object.entries(result)){
-                   result_list.push(`<li><b>Pregunta:</b> ${question} <b>Respuesta:</b> ${answer.answered} </li>`)
+                    console.log(answer)
+                    if (answer.answered===answer.correct_answer){
+                        result_list.push(`<li class="list-group-item list-group-item-success"><b>Pregunta:</b> ${question} <br><b>Respuesta:</b> ${answer.answered} </li>
+                        `)
+                    }
+                    else{
+                        if (answer.answered !== answer.correct_answer){
+                            result_list.push(`<li class="list-group-item list-group-item-danger"><b>Pregunta:</b> ${question} <br><b>Respuesta:</b> ${answer.answered} </li>
+                            `)
+                        }
+                    }
+
                 }
+
                 return console.log(result)
             })
-            modalList.innerHTML=result_list
+            score_html=`<b>Puntaje:</b> ${score} </li>`
+            modalList.innerHTML=result_list.join(' ')
+            modalList.innerHTML = modalList.innerHTML+score_html
         },
         error: function(error){
             console.log(error)

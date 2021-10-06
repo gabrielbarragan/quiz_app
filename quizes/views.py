@@ -1,3 +1,5 @@
+from typing import Text
+from django.core import paginator
 from django.http.response import HttpResponse
 from django.shortcuts import render
 
@@ -6,8 +8,8 @@ from results.models import Result
 from questions.models import Question, Answer
 from django.views.generic import ListView, DetailView,CreateView
 from django.http import JsonResponse
-
-from results.forms import CreateResultForm
+from django.views.generic.list import MultipleObjectMixin
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -46,9 +48,10 @@ class QuizDetailView(DetailView):
     template_name='quizes/quiz.html'
     slug_field= 'pk'
     slug_url_kwarg='quiz_id'
-    queryset = Quiz.objects.all()
-
+    model= Quiz
     context_object_name = 'quiz'
+
+
 class QuizDataView(JSONResponseMixin, DetailView):
     """Quiz data view."""
     template_name='quizes/quiz_data.html'

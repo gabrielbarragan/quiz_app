@@ -6,6 +6,7 @@ const quiz_name=  document.getElementById('quiz-form').name
 const n_questions=  quizForm.getAttribute('data-n_of_questions')
 const csrf = document.getElementsByName('csrfmiddlewaretoken')
 const elements = [...document.getElementsByTagName('input')]
+const noBtn = document.getElementById('no-button')
 
 // modal elements
 const modalBtns = [...document.getElementsByClassName('modal-button')]
@@ -74,7 +75,12 @@ const sendData = () => {
         }
     
     })
+    startBtn.addEventListener('click', ()=>{
+        startBtn.setAttribute('href',`..`)
+    })
+
 }
+
 
 
 

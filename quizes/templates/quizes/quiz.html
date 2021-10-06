@@ -14,28 +14,30 @@
 {% endblock title %}
 
 {% block content %}
-<h2>{{quiz.name}}</h2>
-<hr>
-<form action="" id="quiz-form" class="mt-3 mb-3" method="POST" enctype="multipart/form-data" name="{{quiz.name}}" data-n_of_questions={{quiz.number_of_questions}}>
-  {% csrf_token %}
-{% for question in quiz.get_questions%}
-    <h6>{{question.text}}:</h6>
-    {% for answer in question.get_answer %}
-    <div class="form-check">
-      <input class="ans" type="radio" value="{{answer.pk}}" name="{{question.pk}}" id="{{question.pk}}-{{answer.pk}}">
-      <label class="ans" for="{{question.pk}}">
-      {{answer.text}}
-      </label>
+
+{% block container %}
+    <div class="container">
+        <div class="row pt-4">
+          <h2>{{quiz.name}}</h2>
+          <hr>
+          <form action="" id="quiz-form" class="mt-3 mb-3" method="POST" enctype="multipart/form-data" name="{{quiz.name}}" data-n_of_questions={{quiz.number_of_questions}}>
+            {% csrf_token %}            
+            {% for question in quiz.get_questions%}
+
+              {% include "quizes/question.html" %}
+
+            {% endfor %}
+
+            <button type="submit" 
+            class="btn btn-primary mt-3 modal-button"
+            data-bs-toggle="modal" 
+            data-bs-target="#quizStartModal">Guardar</button>
+          </form>
+        </div>
     </div>
-    {% endfor %}
-    <br>
-  <hr>
-{% endfor %}
-<button type="submit" 
-class="btn btn-primary mt-3 modal-button"
-data-bs-toggle="modal" 
-data-bs-target="#quizStartModal">Guardar</button>
+    
+{% endblock container %}
 {% include "quizes/modal.html" %}
-</form>
+
 {% endblock content %}
 

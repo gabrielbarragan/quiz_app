@@ -1,0 +1,12 @@
+
+    <h6>{{question.text}}:</h6>
+    {% for answer in question.get_answer %}
+    <div class="form-check">
+      <input class="ans" type="radio" value="{{answer.pk}}" name="{{question.pk}}" id="{{question.pk}}-{{answer.pk}}">
+      <label class="ans" for="{{question.pk}}">
+      {{answer.text}}
+      </label>
+    </div>
+    {% endfor %}
+    <br>
+  <hr>

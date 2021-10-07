@@ -1,3 +1,27 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
 .not-visible{
     display:none;
 }
+
+
+#auth-container {
+    background: #ecebeb;
+    color: black;
+    border-radius: 10px;
+}
+
+#auth-container input{
+    background-color: #e6e6e6;
+    color: black;
+}
+
+
+
+
+
+
+

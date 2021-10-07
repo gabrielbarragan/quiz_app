@@ -14,7 +14,7 @@ class CreateResultForm(forms.Form):
     score = forms.FloatField()
 
     def save(self):
-        """Create and save user and profile"""
+        """Create and save user and Player"""
         data = super().clean()
         user= self.data['username']
         quiz= self.data['quiz']

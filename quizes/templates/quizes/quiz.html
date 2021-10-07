@@ -17,10 +17,11 @@
 
 {% block container %}
     <div class="container">
-        <div class="row pt-4">
-          <h2>{{quiz.name}}</h2>
+        <div class="row pt-4 pricing-header p-3 pb-md-4 mx-auto text-center h-80" >
+          <h2 class="display-5 fw-bold">{{quiz.name}}</h2>
           <hr>
-          <form action="" id="quiz-form" class="mt-3 mb-3" method="POST" enctype="multipart/form-data" name="{{quiz.name}}" data-n_of_questions={{quiz.number_of_questions}}>
+          <div class="d-flex justify-content-center">
+          <form action="" id="quiz-form" class="mt-3 mb-3 container" method="POST" enctype="multipart/form-data" name="{{quiz.name}}" data-n_of_questions={{quiz.number_of_questions}}>
             {% csrf_token %}            
             {% for question in quiz.get_questions%}
 
@@ -33,6 +34,9 @@
             data-bs-toggle="modal" 
             data-bs-target="#quizStartModal">Guardar</button>
           </form>
+          <b></b>
+          </div>
+          
         </div>
     </div>
     

@@ -1,12 +1,16 @@
-
-    <h6>{{question.text}}:</h6>
+<div class="card my-3 mx-3 ">
+  <div class="card-body">
+    <h1 class="card-title text-dark display-3">{{question.text}}:</h1>
     {% for answer in question.get_answer %}
-    <div class="form-check">
-      <input class="ans" type="radio" value="{{answer.pk}}" name="{{question.pk}}" id="{{question.pk}}-{{answer.pk}}">
-      <label class="ans" for="{{question.pk}}">
+    <div class="form-check mx-auto">
+      <input class="ans  form-check-input" type="radio" value="{{answer.pk}}" name="{{question.pk}}" id="{{question.pk}}-{{answer.pk}}">
+      <label class="ans form-check-label text-dark display-5" autocomplete="off" for="{{question.pk}}-{{answer.pk}}">
       {{answer.text}}
       </label>
     </div>
     {% endfor %}
     <br>
   <hr>
+  </div>
+</div>
+

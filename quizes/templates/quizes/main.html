@@ -13,34 +13,39 @@ Home
 {% endblock title %}
 
 {% block content %}
-<div class="container">
+<div class="container pricing-header p-3 pb-md-4 mx-auto text-center">
     <br class="row pt-4">
-        <h1>Quiz List</h1>
+        <h1 class="display-4 fw-bold">Quices</h1>
         <hr>
-        <ol>
+</div> 
+<div class="container p-4">
+  <div class="row justify-content-center">
+      <div class=" col-sm-12 col-md-8 col-lg-5 col-xl-4 py-4 " id="auth-container">
+        <ul class="list-group">
           {% for quiz in quizes %}
-            <li><h4 class="">{{ quiz.name }}</h4>
-          <span>
-            <!-- Button trigger modal -->  
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+                          <!-- Button trigger modal -->  
             <button 
-              type="button" 
-              class="btn btn-primary modal-button"
-              data-bs-toggle="modal" 
-              data-bs-target="#quizStartModal" 
-              data-pk="{{quiz.pk}}"
-              data-quiz="{{quiz.name}}"
-              data-questions="{{quiz.number_of_questions}}"
-              data-difficulty="{{quiz.difficulty}}"
-              data-time="{{quiz.time}}"
-              data-pass="{{quiz.required_score_to_pass}}">
-                Hacer quiz
-            </button>
-          </span>
+            id="quiz-button"
+            type="button" 
+            class="btn btn-success modal-button "
+            data-bs-toggle="modal" 
+            data-bs-target="#quizStartModal" 
+            data-pk="{{quiz.pk}}"
+            data-quiz="{{quiz.name}}"
+            data-questions="{{quiz.number_of_questions}}"
+            data-difficulty="{{quiz.difficulty}}"
+            data-time="{{quiz.time}}"
+            data-pass="{{quiz.required_score_to_pass}}">
+              {{quiz.name}}
+          </button>
+              <span class="badge bg-primary rounded-pill me-0">{{quiz.number_of_questions}} Preguntas</span>
           </li>
           <br>
           {% endfor %}
           {% include "quizes/modal.html" %}
-        </ol>
+        </ul>
+  </div>
 </div>
 
 

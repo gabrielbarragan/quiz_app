@@ -1,15 +1,16 @@
-from typing import Text
-from django.core import paginator
-from django.http.response import HttpResponse
-from django.shortcuts import render
 
+#django
+from django.http.response import HttpResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, DetailView
+from django.http import JsonResponse
+
+#models
 from .models import Quiz
 from results.models import Result
 from questions.models import Question, Answer
-from django.views.generic import ListView, DetailView,CreateView
-from django.http import JsonResponse
-from django.views.generic.list import MultipleObjectMixin
-from django.core.paginator import Paginator
+
+
 
 # Create your views here.
 
@@ -36,13 +37,13 @@ class JSONResponseMixin:
         # -- can be serialized as JSON.
         return context
 
-class QuizListView (ListView):
+class QuizListView (LoginRequiredMixin, ListView):
     '''Quiz list view'''
     model = Quiz
     template_name = 'quizes/main.html'
     context_object_name= 'quizes'
 
-class QuizDetailView(DetailView):
+class QuizDetailView(LoginRequiredMixin, DetailView):
     """Quiz detail view."""
 	
     template_name='quizes/quiz.html'

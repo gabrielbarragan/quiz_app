@@ -22,8 +22,9 @@
 
     <title>quiz app| {% block title %}{% endblock title %}</title>
   </head>
-  <body class=" d-flex flex-column justify-content-between bg-dark text-light h-100">
-    <div class=" mt-3 row justify-content-center">
+  <body class=" d-flex flex-column bg-dark text-light h-100">
+    {% include 'header.html' %}
+    <div class=" row justify-content-center">
         {% block content %}
         {% endblock content %}
     </div>

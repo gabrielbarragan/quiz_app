@@ -24,22 +24,25 @@
                     <h1 class="h3 mb-3 fw-normal">Ingresa tus datos</h1>
                     <div class="form-floating">
                         <input class="form-control" type="text" placeholder="Username" name="username" />
-                        <label for="floatingInput">Username</label>
+                        <label for="floatingInput">Usuario</label>
                     </div>
                     <div class="form-floating">
                         <input class="form-control" type="password" placeholder="Password" name="password" />
-                        <label for="floatingInput">Password</label>
+                        <label for="floatingInput">Contraseña</label>
                     </div>
 
                     <div class="checkbox mb-3">
                         <label>
-                        <input type="checkbox" value="remember-me"> Remember me
+                        <input type="checkbox" value="remember-me"> Recuerdame
                         </label>
                     </div>
 
                     <input type="hidden" name="next" value="">
 
-                <button class="w-100 btn btn-lg btn-primary" type="submit">Sing in</button>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
+                <p class="mt-4">
+                  ¿No tienes una cuenta aún? <a href="{% url 'user:signup' %}"> Registrate aquí.</a>
+                </p>
 
                 </form>
 

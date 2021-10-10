@@ -97,8 +97,9 @@ def save_quiz_view(request,quiz_id):
         multiplier= 100/int(n_question)
 
         correct=''
-
+        
         for key,values in data_.items():
+            
             q=Question.objects.get(pk=key)
 
             for ans in q.get_answer():

@@ -5,7 +5,7 @@ const quizForm = document.getElementById('quiz-form')
 const quiz_name=  document.getElementById('quiz-form').name
 const n_questions=  quizForm.getAttribute('data-n_of_questions')
 const csrf = document.getElementsByName('csrfmiddlewaretoken')
-const elements = [...document.getElementsByTagName('input')]
+const inputs_elements = [...document.getElementsByTagName('input')]
 const noBtn = document.getElementById('no-button')
 
 // modal elements
@@ -14,6 +14,10 @@ const modalTitle = document.getElementById('modaltitle')
 const modalText = document.getElementById('confirm-text')
 const modalList = document.getElementById('modal-list-confirm')
 const startBtn = document.getElementById('start-button')
+
+const elements = inputs_elements.filter(function(input){
+    return input !== document.querySelector('#search')
+})
 
 
 const sendData = () => {

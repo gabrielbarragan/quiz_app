@@ -8,25 +8,25 @@ from user.models import Player
 
 class SignupForm(forms.Form):
     """sing up form"""
-    username = forms.CharField(min_length=4, max_length=50)
+    username = forms.CharField(min_length=4, max_length=50, widget=forms.TextInput(attrs={'class' : 'form-control'}))
 
     password = forms.CharField(
         min_length=6,
         max_length=70,
-        widget=forms.PasswordInput()
+        widget=forms.PasswordInput(attrs={'class' : 'form-control'})
     )
     confirmation_password = forms.CharField(
         min_length=6,
         max_length=70,
-        widget=forms.PasswordInput()
+        widget=forms.PasswordInput(attrs={'class' : 'form-control'})
     )
 
-    first_name= forms.CharField(min_length=2,max_length=50)
-    last_name= forms.CharField(min_length=2,max_length=50)
+    first_name= forms.CharField(min_length=2,max_length=50, widget=forms.TextInput(attrs={'class' : 'form-control'}))
+    last_name= forms.CharField(min_length=2,max_length=50, widget=forms.TextInput(attrs={'class' : 'form-control'}))
     email = forms.CharField(
         min_length=6,
         max_length=70,
-        widget=forms.EmailInput()
+        widget=forms.EmailInput(attrs={'class' : 'form-control'})
     )
 
     def clean_username(self):
@@ -50,6 +50,6 @@ class SignupForm(forms.Form):
 class PlayerForm(forms.Form):
     """Player form """
     
-    biography = forms.CharField(max_length=20,required=False)
-    picture = forms.ImageField()
+    biography = forms.CharField(max_length=20,required=False, widget=forms.TextInput(attrs={'class' : 'form-control'}))
+    picture = forms.ImageField(widget=forms.FileInput(attrs={'class' : 'form-control'}))
 

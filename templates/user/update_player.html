@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+ {% block title %}
+  actualizar Jugador @{{ request.user.username }}
+ {% endblock %}
+
+ {% block content %}
+
+ <div class="container">
+     <div class="row justify-content-md-center">
+
+        <div class="col col-lg-2 col-12">
+            <div class="media pt-5">
+                {% if player.picture %}
+                    <img src="{{ player.picture.url }}" class="rounded-circle mb-2 border border-4" height="100" />
+                {% else%}
+                    <img src="{% static 'img/default-profile.png' %}" class="rounded-circle mb-2 border border-4" height="100" />
+                {% endif %}
+    
+                <div class="media-body">
+                    <h5 class="ml-4">@{{ user.username }}</h5> <p>{{ user.get_full_name }}</p>
+                </div>
+            </div>
+          </div>
+          
+          <div class="col col-lg-8 col-12">
+            <div class="col-8 p-4 ml-2 ms-0 w-100" id="profile-box">
+    
+                <form action="{% url 'user:update_player' %}" method="POST" enctype="multipart/form-data" >
+                    {% csrf_token %}
+    
+                    <h3 class="h3">Editar Jugador</h3>
+    
+                    <hr>
+                    {# picture field #}
+                    <div class="form-group">
+                        <label for="formFileSm" class="form-label ">Cambiar foto de perfíl</label>
+                        <input class="form-control form-control-sm" type="file" name="picture" id="formFileSm">
+                    </div>
+                    <p class="text-danger fs-6 ">
+                        {% for error in form.picture.errors %} 
+                        <b>Picture:</b>{{error}}
+                        {% endfor %}
+                    </p>
+                        
+                    {# Biography field #}
+                    <div class="form-group mb-2">
+                        <label>Biografía</label>
+                        <textarea 
+                        class="form-control 
+                        {% if form.biography.errors %}
+                          is-invalid
+                        {%endif%}"
+                        name="biography">{% if form.biography.errors %}{{form.biography.value}}{% else %}{{player.biography}}{% endif %}</textarea>
+                        <span class="invalid-feedback">
+                          {% for error in form.biography.errors %} 
+                            {{error}}
+                          {% endfor %}
+                        </span>
+                    </div>
+    
+
+    
+                    <button type="submit" class="btn btn-primary btn-block mt-5">Actualizar</button>
+                </form>
+            </div>
+          </div>
+          <div class="col col-lg-2 col-12"></div>
+        </div>
+
+     </div>
+ </div>
+ 
+ {% endblock %}

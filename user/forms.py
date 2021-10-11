@@ -50,6 +50,6 @@ class SignupForm(forms.Form):
 class PlayerForm(forms.Form):
     """Player form """
     
-    biography = forms.CharField(max_length=20,required=False, widget=forms.TextInput(attrs={'class' : 'form-control'}))
-    picture = forms.ImageField(widget=forms.FileInput(attrs={'class' : 'form-control'}))
+    biography = forms.CharField(max_length=20,required=False )
+    picture = forms.ImageField()
 
